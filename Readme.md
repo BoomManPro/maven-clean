@@ -11,6 +11,10 @@ CGO_ENABLED=0;GOOS=windows;GOARCH=amd64
 ```
 
 
+## Todo 
+
+现在扫描文件是单线程的，后续改成多线程 ...
+
 ## Use
 
 link [release](https://github.com/BoomManPro/maven-clean/releases/tag/1.0)
