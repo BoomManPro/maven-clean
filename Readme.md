@@ -4,6 +4,13 @@
 
 
 
+## 设计思路
+
+使用`mvn help:evaluate -Dexpression=settings.localRepository` 命令获取maven repository的地址
+
+然后`递归`清理目录下的文件 *.lastUpdated 文件 和 _remote.repositories 文件
+
+
 ## build windows
 
 ```
