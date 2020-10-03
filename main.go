@@ -77,13 +77,15 @@ func getMvnLocalRepositoryPath() (string, error) {
 	} else {
 		return parserLocalRepositoryPath(string(opBytes))
 	}
+
 }
 
 func parserLocalRepositoryPath(content string) (string, error) {
 	lineList := strings.Split(content, "\n")
 	for i := range lineList {
 		if strings.Index(lineList[i], "[INFO]") == -1 {
-			return lineList[i], nil
+			result := strings.TrimRight(lineList[i], "\r")
+			return result, nil
 		}
 	}
 	return "", errors.New(fmt.Sprintf("没有找到maven Local Repository maven command result: \n%s", content))
