@@ -28,10 +28,7 @@ func main() {
 
 	for i := range fileList {
 		fmt.Printf("删除文件: %s\n", fileList[i])
-		err := os.Remove(fileList[i])
-		if err != nil {
-			fmt.Printf("删除文件失败 -> error:%s", err)
-		}
+		go os.Remove(fileList[i])
 	}
 
 	fmt.Printf("\n\n推荐依赖仓库地址: ->%s", "<url>https://maven.aliyun.com/repository/public</url>")
