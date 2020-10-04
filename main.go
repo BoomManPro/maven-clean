@@ -8,9 +8,11 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 func main() {
+	defer timeCost()()
 	path, err := getMvnLocalRepositoryPath()
 	if err != nil {
 		fmt.Printf("发生异常:%v", err)
@@ -36,6 +38,7 @@ func main() {
 
 }
 
+// 获取所有异常文件  *.lastUpdated 文件 和 _remote.repositories
 func getAllLastUpdateFile(dir string) ([]string, error) {
 	var result []string
 	err := filepath.Walk(dir,
@@ -89,4 +92,13 @@ func parserLocalRepositoryPath(content string) (string, error) {
 		}
 	}
 	return "", errors.New(fmt.Sprintf("没有找到maven Local Repository maven command result: \n%s", content))
+}
+
+//@brief：耗时统计函数
+func timeCost() func() {
+	start := time.Now()
+	return func() {
+		tc := time.Since(start)
+		fmt.Printf("\ntime cost = %v\n", tc)
+	}
 }
